@@ -26,12 +26,12 @@ class App extends Component {
             ) : (
               <div>
                 <Switch>
-                  {/* <Route path="/" exact component={Dashboard} /> */}
                   <Route path="/" exact component={Home} />
                   <Route path="/questions/:id" component={Question} />
                   <Route path="/add" component={NewQuestion} />
                   <Route path="/leaderboard" component={Leadboard} />
-                  <Route path="*" exact={true} component={NotFound} />
+                  <Route path="/404" component={NotFound} />
+                  <Route component={NotFound} />
                 </Switch>
               </div>
             )}

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 class Login extends Component {
   hanleSelectValue(id) {
-    console.log(id);
     this.props.dispatch(handleInitialData(id));
   }
   render() {
@@ -35,28 +34,34 @@ class Login extends Component {
 
             <div className="dropdown-content">
               <a
-                href="#"
                 value="sarahedo"
                 onClick={(e) => this.hanleSelectValue("sarahedo")}
               >
-                <img src="https://tylermcginnis.com/would-you-rather/sarah.jpg" />{" "}
+                <img
+                  src="https://tylermcginnis.com/would-you-rather/sarah.jpg"
+                  alt="sarah edo"
+                />{" "}
                 sarah edo
               </a>
 
               <a
-                href="#"
                 value="tylermcginnis"
                 onClick={(e) => this.hanleSelectValue("tylermcginnis")}
               >
-                <img src="https://tylermcginnis.com/would-you-rather/tyler.jpg" />{" "}
+                <img
+                  src="https://tylermcginnis.com/would-you-rather/tyler.jpg"
+                  alt="Tyler McGinnis"
+                />{" "}
                 Tyler McGinnis
               </a>
               <a
-                href="#"
                 value="johndoe"
                 onClick={(e) => this.hanleSelectValue("johndoe")}
               >
-                <img src="https://tylermcginnis.com/would-you-rather/dan.jpg" />{" "}
+                <img
+                  src="https://tylermcginnis.com/would-you-rather/dan.jpg"
+                  alt="John Doe"
+                />{" "}
                 John Doe
               </a>
             </div>

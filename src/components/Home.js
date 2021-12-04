@@ -1,4 +1,4 @@
-import React, { Component, useReducer } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -10,24 +10,24 @@ class Home extends Component {
     return (
       <Tabs>
         <TabList>
-          <Tab>Answered Questions</Tab>
           <Tab>Unanswered Questions</Tab>
+          <Tab>Answered Questions</Tab>
         </TabList>
 
         <TabPanel>
           <ul className="dashboard-list">
-            {this.props.answeredQuestions.map((id) => (
-              <li key={id}>
-                <Question id={id} isPoll={true} />
+            {this.props.unansweredQuestions.map((question) => (
+              <li key={question.id}>
+                <Question id={question.id} isPoll={true} />
               </li>
             ))}
           </ul>
         </TabPanel>
         <TabPanel>
           <ul className="dashboard-list">
-            {this.props.unansweredQuestions.map((id) => (
-              <li key={id}>
-                <Question id={id} isPoll={true} />
+            {this.props.answeredQuestions.map((question) => (
+              <li key={question.id}>
+                <Question id={question.id} isPoll={true} />
               </li>
             ))}
           </ul>
@@ -42,13 +42,26 @@ function mapStateToProps({ authedUser, users, questions }) {
   for (var question in questions) allQuestions.push(question);
 
   let answered = users[authedUser].answers;
-  let answeredQuestions = [];
+  let answeredQuestionsIds = [];
   for (var questionId in answered) {
-    answeredQuestions.push(questionId);
+    answeredQuestionsIds.push(questionId);
   }
-  let unansweredQuestions = allQuestions.filter(
-    (x) => !answeredQuestions.includes(x)
+  let unansweredQuestionsIds = allQuestions.filter(
+    (x) => !answeredQuestionsIds.includes(x)
   );
+  const answeredQuestions = [];
+  const unansweredQuestions = [];
+  answeredQuestionsIds.forEach((id) => {
+    answeredQuestions.push(questions[id]);
+  });
+  unansweredQuestionsIds.forEach((id) => {
+    unansweredQuestions.push(questions[id]);
+  });
+  function custom_sort(a, b) {
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+  }
+  answeredQuestions.sort(custom_sort);
+  unansweredQuestions.sort(custom_sort);
 
   return {
     questions: Object.keys(questions).sort(

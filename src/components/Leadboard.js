@@ -1,4 +1,4 @@
-import React, { Component, useReducer } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class leaderboard extends Component {
@@ -9,7 +9,7 @@ class leaderboard extends Component {
         <h1> leaderboard</h1>
         {sortedUsers.map((user) => {
           return (
-            <div style={{ paddingBottom: "20px" }}>
+            <div key={user.id} style={{ paddingBottom: "20px" }}>
               <div
                 style={{
                   padding: "10px",

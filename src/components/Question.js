@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
+import { Redirect } from "react-router-dom";
 
 import { handleQuestionAnswer } from "../actions/questions";
 import { Link, withRouter } from "react-router-dom";
@@ -29,13 +30,18 @@ class Question extends Component {
 
     if (!question) {
       question = this.props.questions[this.props.match.params.id];
-      if (users[authedUser].answers[question.id]) {
+      if (question && users[authedUser].answers[question.id]) {
         answered = true;
       }
     }
 
     if (!question) {
-      return <p>This question doesn't exist</p>;
+      return (
+        <div>
+          <p>This question doesn't exist</p>
+          <Redirect to="/404" />
+        </div>
+      );
     }
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
