@@ -114,7 +114,7 @@ class Question extends Component {
                   {question.optionOne.text +
                     `${
                       question.optionOne.votes.includes(authedUser)
-                        ? "your vote"
+                        ? " (your vote)"
                         : ""
                     }`}
                 </h3>
